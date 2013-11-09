@@ -1,0 +1,29 @@
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+web/assets/*
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+
+#Zend Studio project files
+.buildpath
+.project
+.settings*
+
+#Netbeans project files
+*/.netbeans/*
+nbproject/*
+
+# PHPStorm
+.idea/*
+
+# Pliki Composera
+composer.phar
