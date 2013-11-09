@@ -1,0 +1,7 @@
+TrackerBackBundle_series:
+    resource: "@TrackerBackBundle/Resources/config/routing/series.yml"
+    prefix:   /series
+
+TrackerBackBundle_tracker:
+    resource: "@TrackerBackBundle/Resources/config/routing/tracker.yml"
+    prefix:   /tracker

@@ -1,0 +1,7 @@
+tracker_track:
+    pattern:  /track
+    defaults: { _controller: "TrackerBackBundle:Tracker:track" }
+
+tracker_update:
+    pattern:  /update
+    defaults: { _controller: "TrackerBackBundle:Tracker:update" }

@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Nowy serial</h1>
+
+    <form action="{{ path('series_create') }}" method="post" {{ form_enctype(form) }}>
+        <div class="row-fluid">
+            <div class="span12">{{ form_errors(form) }}</div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                {{ form_widget(form.name, {'attr': {'class': 'span12', 'placeholder': 'Nazwa serialu'}}) }}
+            </div>
+            <div class="span8">
+                {{ form_widget(form.description, {'attr': {'class': 'span12', 'rows': 10, 'placeholder': 'Opis serialu'}}) }}
+            </div>
+        </div>
+        {{ form_widget(form._token) }}
+        <p>
+            <button type="submit" class="btn btn-info">
+                <i class="icon-plus"></i>Dodaj
+            </button>
+        </p>
+    </form>
+
+    <a href="{{ path('series') }}" class="btn btn-info">
+        <i class="icon-arrow-left"></i> Powrót do listy
+    </a>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Serial</h1>
+
+    <table class="record_properties table table-bordered">
+        <tbody>
+            <tr>
+                <th style="width:20%">Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nazwa</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Opis</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('series') }}" class="btn btn-info">
+        <i class="icon-arrow-left"></i> Powrót do listy
+    </a>
+    <a href="{{ path('series_edit', { 'id': entity.id }) }}" class="btn btn-info">
+        <i class="icon-pencil"></i> Edycja
+    </a>
+
+    <form action="{{ path('series_delete', { 'id': entity.id }) }}" method="post" style="display: inline-block;">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit" class="btn btn-danger"><i class="icon-remove"></i>  Usuń</button>
+    </form>
+
+    <h1>Odcinki</h1>
+    <div class="accordion" id="accordion2" data-toggle="collapse">
+        {% for episode in entity.episodes %}
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{ loop.index }}">
+                    {% if episode.season == '' %}
+                        Ciężko powiedzieć
+                    {%  elseif episode.number == '' %}
+                        Pełny Sezon {{ episode.season }}
+                    {%  else %}
+                        Sezon {{ episode.season }} Epizod {{ episode.number }}
+                    {% endif %}
+                </a>
+            </div>
+            <div id="collapse{{ loop.index }}" class="accordion-body collapse{% if loop.index == 1 %}in{% endif %}">
+                <div class="accordion-inner">
+                    <table class="table table-striped" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="width: 50%;">Nazwa</th>
+                                <th style="width: 10%;">Jakość</th>
+                                <th style="width: 10%;">Magnet</th>
+                                <th style="width: 10%;">Link</th>
+                                <th style="width: 10%;">Seeds</th>
+                                <th style="width: 10%;">Peers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for torrent in episode.torrents %}
+                            <tr>
+                                <td style="width: 50%;">{{ torrent.title }}</th>
+                                <td style="width: 10%;">
+                                    <img src="{% spaceless %}
+                                    {% if torrent.quality == 3 %}
+                                        {{ asset('img/icons/glyphicons_391_video_hd.png') }}
+                                    {% elseif torrent.quality == 2 %}
+                                        {{ asset('img/icons/glyphicons_390_video_sd.png') }}
+                                    {% elseif torrent.quality == 1 %}
+                                        {{ asset('img/icons/glyphicons_138_picture.png') }}
+                                    {% else %}
+                                        {{ asset('img/icons/glyphicons_192_circle_remove.png') }}
+                                    {% endif %}
+                                    {% endspaceless %}"/>
+                                </th>
+                                <td style="width: 10%;">
+                                    <a href="{{ torrent.magnet }}">
+                                        <i class="icon-magnet"></i>
+                                    </a>
+                                </th>
+                                <td style="width: 10%;">
+                                    <a href="{{ torrent.link }}" target="_blank">
+                                        <i class="icon-bookmark"></i>
+                                    </a>
+                                </th>
+                                <td style="width: 10%;">{{ torrent.seeds }}</th>
+                                <td style="width: 10%;">{{ torrent.peers }}</th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

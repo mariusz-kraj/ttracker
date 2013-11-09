@@ -1,0 +1,34 @@
+series:
+    pattern:  /
+    defaults: { _controller: "TrackerBackBundle:Series:index" }
+
+series_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TrackerBackBundle:Series:show" }
+    
+series_feed:
+    pattern: /{id}/feed/{format}
+    defaults: { _controller: TrackerBackBundle:Series:feed, format: 'rss' }
+
+series_new:
+    pattern:  /new
+    defaults: { _controller: "TrackerBackBundle:Series:new" }
+
+series_create:
+    pattern:  /create
+    defaults: { _controller: "TrackerBackBundle:Series:create" }
+    requirements: { _method: post }
+
+series_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TrackerBackBundle:Series:edit" }
+
+series_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TrackerBackBundle:Series:update" }
+    requirements: { _method: post|put }
+
+series_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TrackerBackBundle:Series:delete" }
+    requirements: { _method: post|delete }

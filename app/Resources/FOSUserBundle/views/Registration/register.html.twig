@@ -1,0 +1,20 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+    {% block title %}Rejestracja{% endblock %}
+    {% block fos_user_content %}
+    <div class="center">
+        {% if app.user %}
+            Jesteś już zalogowany. <br />
+            <a href="{{ path("fos_user_security_logout") }}" class="btn btn-warning">Wyloguj</a><br />
+            <a href="{{ path("ftb_homepage") }}" class="btn btn-success">Strona główna</a>
+        {% else %}
+            <div class="register-box">
+                <hr />
+                    <h4>{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</h4>
+                <hr />
+
+                {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+                <a href="{{ path("fos_user_security_login") }}" >{{ 'layout.login'|trans({}, 'FOSUserBundle') }} </a><br />
+            </div>
+       {% endif %}
+    </div>
+{% endblock fos_user_content %}

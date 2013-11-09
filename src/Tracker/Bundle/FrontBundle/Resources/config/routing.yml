@@ -1,0 +1,6 @@
+index:
+    pattern: /
+    defaults: { _controller: TrackerFrontBundle:Index:index }
+feed:
+    pattern: /feed/{format}
+    defaults: { _controller: TrackerFrontBundle:Index:feed, format: 'rss' }

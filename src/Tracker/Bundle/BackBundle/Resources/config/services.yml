@@ -1,0 +1,7 @@
+parameters:
+#    tracker_back.example.class: Tracker\Bundle\BackBundle\Example
+
+services:
+#    tracker_back.example:
+#        class: %tracker_back.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
